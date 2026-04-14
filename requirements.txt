@@ -1,0 +1,4 @@
+google-cloud-bigquery==3.41.0
+PyYAML==6.0.3
+requests==2.33.1
+urllib3==2.6.3
