@@ -1,0 +1,25 @@
+project_id: devx-tsc
+dataset: sample_dataset_5
+location: US
+
+api:
+  url: "https://randomuser.me/api/"
+  params:
+    results: 10
+    seed: easytest
+
+tables:
+  raw_table: raw_api_data
+
+  normalized_tables:
+    - users
+    - user_location
+    - user_login
+    - user_dob
+    - user_registered
+    - user_id_info
+    - user_picture
+
+pipeline:
+  max_retries: 3
+  retry_delay: 5
