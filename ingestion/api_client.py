@@ -1,12 +1,16 @@
 import requests
 import time
 
-def fetch_api_data(config: dict):
+
+def fetch_api_data(url: str, params: dict, retries: int = 2, delay: int = 5):
     """
     Fetches data from an API
 
     Args:
-        config (dict): Configuration loaded from config.yml.
+        url (str): API url to be loaded from config.yml
+        params (dict): Params dict
+        retries (int): Number of retries, default 2
+        delay (int): Delay in seconds, default 5
 
     Returns:
         dict: A JSON response if the request is successful.
@@ -14,11 +18,6 @@ def fetch_api_data(config: dict):
     Raises:
         Exception: If the maximum number of retries is reached or a 500-level server error occurs.
     """
-
-    url = config["api"]["url"]
-    params = config["api"]["params"]
-    retries = config["pipeline"]["max_retries"]
-    delay = config["pipeline"]["retry_delay"]
 
     for i in range(retries):
         try:
