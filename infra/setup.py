@@ -45,6 +45,16 @@ def create_table(client, dataset, table_name, schema):
         print(f"Table '{table_name}' created successfully")
 
 
+def run_sql_file(client, file_path):
+    with open(file_path, "r") as f:
+        query = f.read()
+
+    job = client.query(query)
+    job.result()
+
+    return job
+
+
 def main():
     """
     Orchestrates the setup of the BigQuery infra required for the project by loading
@@ -71,6 +81,9 @@ def main():
     # NORMALIZED TABLES
     for table in config["tables"]["normalized_tables"]:
         create_table(client, dataset, table, TABLE_SCHEMAS[table])
+
+    run_sql_file(client, "infra/metadata_info.sql")
+    print("Metadata created")
 
 
 if __name__ == "__main__":

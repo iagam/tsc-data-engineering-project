@@ -15,6 +15,15 @@ AUDIT_LOG_SCHEMA = [
     bigquery.SchemaField("error_message", "STRING"),
 ]
 
+METADATA_INFO_SCHEMA = [
+    bigquery.SchemaField("table_name", "STRING"),
+    bigquery.SchemaField("column_name", "STRING"),
+    bigquery.SchemaField("data_type", "STRING"),
+    bigquery.SchemaField("is_nullable", "BOOLEAN"),
+    bigquery.SchemaField("source", "STRING"),
+    bigquery.SchemaField("created_at", "TIMESTAMP"),
+]
+
 METRICS_SCHEMA = [
     bigquery.SchemaField("run_id", "STRING"),
     bigquery.SchemaField("table_name", "STRING"),
@@ -76,6 +85,7 @@ TABLE_SCHEMAS = {
     "raw_api_data": RAW_SCHEMA,
     "pipeline_audit_logs": AUDIT_LOG_SCHEMA,
     "pipeline_metrics": METRICS_SCHEMA,
+    "metadata_info": METADATA_INFO_SCHEMA,
     "users_user": USERS_USER_SCHEMA,
     "users_location": USERS_LOCATION_SCHEMA,
     "users_contact": USERS_CONTACT_SCHEMA,
