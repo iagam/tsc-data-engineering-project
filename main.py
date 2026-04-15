@@ -69,6 +69,7 @@ def main():
 
     except Exception as e:
         print("Pipeline failed:", e)
+        log_step_end(client, project, dataset, run_id, step, "FAILED")
         raise
 
     return data
