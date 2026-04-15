@@ -9,18 +9,18 @@ def run_query(client, query):
     return job
 
 
-def execute_transformations(client, dataset, run_id, steps):
+def execute_transformations(client, project, dataset, run_id, steps):
     for step, query in steps:
         try:
             start = time.time()
 
-            log_step_start(client, dataset, run_id, step)
+            log_step_start(client, project, dataset, run_id, step)
 
             job = run_query(client, query)
 
             duration = time.time() - start
 
-            log_step_end(client, dataset, run_id, step, "SUCCESS")
+            log_step_end(client, project, dataset, run_id, step, "SUCCESS")
 
             # Get affected rows
             query_stats = job._properties.get("statistics", {}).get("query", {}).get("dmlStats", {})
@@ -33,5 +33,5 @@ def execute_transformations(client, dataset, run_id, steps):
             # log_metrics(client, dataset, run_id, step, count, duration)
 
         except Exception as e:
-            log_step_end(client, dataset, run_id, step, "FAILED", str(e))
+            log_step_end(client, project, dataset, run_id, step, "FAILED", str(e))
             raise

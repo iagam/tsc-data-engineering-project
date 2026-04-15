@@ -24,7 +24,7 @@ def main():
         # API FETCH
         step = "API_FETCH"
         print(step)
-        log_step_start(client, dataset, run_id, step)
+        log_step_start(client, project, dataset, run_id, step)
 
         data = fetch_api_data(
             url=config["api"]["url"],
@@ -34,12 +34,12 @@ def main():
         )
         print('Done')
         print()
-        log_step_end(client, dataset, run_id, step, "SUCCESS")
+        log_step_end(client, project, dataset, run_id, step, "SUCCESS")
 
         # INGESTION
         step = "INGESTION"
         print(step)
-        log_step_start(client, dataset, run_id, step)
+        log_step_start(client, project, dataset, run_id, step)
 
         insert_raw_data(
             client=client,
@@ -51,7 +51,7 @@ def main():
         )
         print("Done")
         print()
-        log_step_end(client, dataset, run_id, step, "SUCCESS")
+        log_step_end(client, project, dataset, run_id, step, "SUCCESS")
 
         # TRANSFORMATION
         print("TRANSFORMATION")
@@ -63,7 +63,7 @@ def main():
             ("users_assets", USERS_ASSETS_UPSERT),
         ]
 
-        execute_transformations(client, dataset, run_id, steps)
+        execute_transformations(client, project, dataset, run_id, steps)
 
         print("Done")
 

@@ -58,6 +58,16 @@ main.py              → pipeline entrypoint
 
 ---
 
+## Prerequisites
+
+Make sure you have the following installed:
+
+* Python 3.12 or higher
+* Check your Python version
+python3 --version
+
+If your version is below 3.12, upgrade Python before proceeding.
+
 ## Setup Instructions
 
 ### 1. Clone Repository
@@ -95,7 +105,7 @@ Place your **BigQuery service account JSON file** inside:
 keys/service_account.json
 ```
 
-### Environment Variables Setup
+### 5. Environment Variables Setup
 
 Create a `.env` file in the root directory:
 
