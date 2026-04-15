@@ -2,7 +2,9 @@ from datetime import datetime, timezone
 import json
 
 
-def insert_raw_data(client, dataset: str, run_id: str, data: dict, raw_table: str):
+def insert_raw_data(
+    client, project_id: str, dataset: str, run_id: str, data: dict, raw_table: str
+):
     """
     Inserts raw JSON data into a BigQuery table with run_id and ingested_at timestamp.
 
@@ -19,7 +21,7 @@ def insert_raw_data(client, dataset: str, run_id: str, data: dict, raw_table: st
     Raises:
         Exception: If the BigQuery insert operation encounters errors, detailing the specific failure messages.
     """
-    table_id = f"{client.project}.{dataset}.{raw_table}"
+    table_id = f"{project_id}.{dataset}.{raw_table}"
 
     rows = [
         {
