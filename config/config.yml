@@ -12,18 +12,15 @@ tables:
   raw_table: raw_api_data
 
   normalized_tables:
-    - users
-    - user_location
-    - user_login
-    - user_dob
-    - user_registered
-    - user_id_info
-    - user_picture
+    - users_user
+    - users_location
+    - users_login
+    - users_assets
+    - users_contact
 
   system_tables:
     - pipeline_metrics
     - pipeline_audit_logs
-    - metadata_info
 
 pipeline:
   max_retries: 3
