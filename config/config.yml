@@ -20,6 +20,11 @@ tables:
     - user_id_info
     - user_picture
 
+  system_tables:
+    - pipeline_metrics
+    - pipeline_audit_logs
+    - metadata_info
+
 pipeline:
   max_retries: 3
   retry_delay: 5
