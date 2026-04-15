@@ -19,6 +19,8 @@ The pipeline:
 
 ## Architecture
 
+![Architecture Diagram](assets/architecture_diagram.png)
+
 **ELT Approach:**
 
 ```
