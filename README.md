@@ -62,11 +62,11 @@ main.py              → pipeline entrypoint
 
 Make sure you have the following installed:
 
-* Python 3.12 or higher
+* Python 3.11 or higher
 * Check your Python version
 python3 --version
 
-If your version is below 3.12, upgrade Python before proceeding.
+If your version is below 3.11, upgrade Python before proceeding.
 
 ## Setup Instructions
 
@@ -113,7 +113,7 @@ Create a `.env` file in the root directory:
 cp .env.example .env
 ```
 
-Update the `.env` file with your actual service account path:
+Update the `.env` file with your actual service account path added to keys folder in previous step:
 
 ```env
 GOOGLE_APPLICATION_CREDENTIALS=keys/service_account.json
@@ -135,8 +135,8 @@ config/config.yml
 Example:
 
 ```yaml
-project_id: project_id_name
-dataset: dataset_name
+project_id: project_id (from service account file)
+dataset: <your_dataset_name>
 ```
 
 ---
