@@ -95,6 +95,20 @@ Place your **BigQuery service account JSON file** inside:
 keys/service_account.json
 ```
 
+### Environment Variables Setup
+
+Create a `.env` file in the root directory:
+
+```bash
+cp .env.example .env
+```
+
+Update the `.env` file with your actual service account path:
+
+```env
+GOOGLE_APPLICATION_CREDENTIALS=keys/service_account.json
+```
+
 > ⚠️ This is required for authentication.
 > The pipeline uses this key to connect to BigQuery.
 
