@@ -1,4 +1,5 @@
-from datetime import datetime
+from datetime import datetime, timezone
+import json
 
 
 def insert_raw_data(client, dataset: str, run_id: str, data: dict, raw_table: str):
@@ -23,8 +24,8 @@ def insert_raw_data(client, dataset: str, run_id: str, data: dict, raw_table: st
     rows = [
         {
             "run_id": run_id,
-            "ingested_at": datetime.now(datetime.timezone.utc).isoformat(),
-            "raw_json": data,
+            "ingested_at": datetime.now(timezone.utc).isoformat(),
+            "raw_json": json.dumps(data),
         }
     ]
 
