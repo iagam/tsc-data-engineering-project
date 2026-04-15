@@ -1,4 +1,4 @@
-# 📊 Data Engineering Assignment – ELT Pipeline (BigQuery)
+# 📊 Data Engineering Project – ELT Pipeline (BigQuery)
 
 ## Overview
 
@@ -64,7 +64,7 @@ main.py              → pipeline entrypoint
 
 ```bash
 git clone <your-repo-url>
-cd data-engineering-assignment
+cd tsc-data-engineering-project
 ```
 
 ---
