@@ -2,6 +2,7 @@ import uuid
 from utils.config_loader import load_config
 from utils.bigquery_client import get_bigquery_client
 from utils.logger import log_step_start, log_step_end
+from infra.setup import run_sql_file
 from ingestion.api_client import fetch_api_data
 from ingestion.loader import insert_raw_data
 from transformations.transform import execute_transformations
@@ -22,7 +23,7 @@ def main():
     try:
 
         # API FETCH
-        step = "API_FETCH"
+        step = "EXTRACT"
         print(step)
         log_step_start(client, project, dataset, run_id, step)
 
@@ -37,7 +38,7 @@ def main():
         log_step_end(client, project, dataset, run_id, step, "SUCCESS")
 
         # INGESTION
-        step = "INGESTION"
+        step = "LOAD"
         print(step)
         log_step_start(client, project, dataset, run_id, step)
 
@@ -72,7 +73,10 @@ def main():
         log_step_end(client, project, dataset, run_id, step, "FAILED")
         raise
 
-    return data
+    # Log pipeline metrics
+    run_sql_file(client, "utils/pipeline_metrics.sql")
+
+    return None
 
 
 if __name__ == "__main__":

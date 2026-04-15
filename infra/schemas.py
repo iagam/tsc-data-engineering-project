@@ -26,10 +26,12 @@ METADATA_INFO_SCHEMA = [
 
 METRICS_SCHEMA = [
     bigquery.SchemaField("run_id", "STRING"),
-    bigquery.SchemaField("table_name", "STRING"),
-    bigquery.SchemaField("records_processed", "INT64"),
-    bigquery.SchemaField("processing_time_seconds", "FLOAT64"),
-    bigquery.SchemaField("created_at", "TIMESTAMP"),
+    bigquery.SchemaField("start_time", "TIMESTAMP"),
+    bigquery.SchemaField("end_time", "TIMESTAMP"),
+    bigquery.SchemaField("extraction_duration", "INT64"),
+    bigquery.SchemaField("load_duration", "INT64"),
+    bigquery.SchemaField("transformation_duration", "INT64"),
+    bigquery.SchemaField("status", "STRING"),
 ]
 
 USERS_USER_SCHEMA = [
