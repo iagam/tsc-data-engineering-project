@@ -21,6 +21,7 @@ tables:
   system_tables:
     - pipeline_metrics
     - pipeline_audit_logs
+    - metadata_info
 
 pipeline:
   max_retries: 3
