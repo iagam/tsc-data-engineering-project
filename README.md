@@ -39,8 +39,9 @@ API → Raw (JSON) → BigQuery → Transform (SQL MERGE) → Normalized Tables
 
 * **Observability Layer**
 
-  * `pipeline_audit_logs` → step-level status
-  * `pipeline_metrics` → performance + row counts
+  * `pipeline_audit_logs`
+  * `pipeline_metrics`
+  * `metadata_info`
 
 ---
 
@@ -147,8 +148,8 @@ This creates:
 
 * Dataset
 * System tables
-* Raw table
-* Audit + metrics tables
+* Raw tables
+* Audit + metrics + metadata_info tables
 
 ```bash
 python -m infra.setup
@@ -180,6 +181,46 @@ python main.py
    * UNNEST JSON
    * Apply MERGE (upsert)
    * Log metrics
+
+---
+
+## 🧩 Schema Design (Normalized Tables)
+
+The raw JSON from the API contains nested structures, which were normalized into multiple tables to improve clarity, reduce redundancy, and support scalable querying.
+
+### Key Design Choice
+
+* `user_id` (from `$.login.uuid`) is used as the **primary key**
+* It acts as a **foreign key across all tables**, ensuring consistent joins
+
+### Table Breakdown
+
+* **`users_user`**
+  Core user attributes (name, gender, DOB, nationality)
+  → Anchor table at **1 row per user**
+
+* **`users_login`**
+  Authentication-related fields (username, password hash, registration date)
+  → Separated for logical grouping and sensitivity
+
+* **`users_location`**
+  Address and geographic details
+  → Flattened from nested `location` object
+
+* **`users_contact`**
+  Contact information (email, phone, cell)
+  → Isolated for modular access
+
+* **`users_assets`**
+  Image URLs (profile pictures)
+  → Stored separately as non-analytical data
+
+### Design Principles
+
+* **Normalization** → avoids duplication of nested fields
+* **Consistent Grain** → each table has **1 row per user per entity**
+* **Separation of Concerns** → logical grouping of attributes
+* **Extensibility** → easy to add new attributes without impacting existing tables
 
 ---
 
@@ -221,7 +262,7 @@ python main.py
 * Captures:
 
   * Rows affected
-  * Execution time
+  * Execution duration
   * Errors
 
 ---
