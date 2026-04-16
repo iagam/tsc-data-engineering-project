@@ -13,6 +13,15 @@ def run_sql_file(client, file_path):
     return job
 
 
+def run_query(client, query: str):
+    """
+    Run a sql query on BigQuery
+    """
+    job = client.query(query)
+    job.result()
+    return job
+
+
 def load_config():
     load_dotenv()
 

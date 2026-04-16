@@ -1,19 +1,9 @@
 import time
 from utils.logger import log_step_start, log_step_end
+from utils.helper import run_query
 
 
-def run_query(client, query: str):
-    """
-    Run a sql query on BigQuery
-    """
-    job = client.query(query)
-    job.result()
-    return job
-
-
-def execute_transformations(
-    client, project: str, dataset: str, run_id: str, steps: list
-):
+def execute_transformations(client, dataset: str, run_id: str, steps: list):
     """
     Executes a sequence of transformation queries in BigQuery with step-level logging.
 
@@ -38,14 +28,14 @@ def execute_transformations(
         try:
             start = time.time()
 
-            log_step_start(client, project, dataset, run_id, step)
+            log_step_start(client, dataset, run_id, step)
 
             job = run_query(client, query)
 
             duration = time.time() - start
 
-            log_step_end(client, project, dataset, run_id, step, "SUCCESS")
+            log_step_end(client, dataset, run_id, step, "SUCCESS")
 
         except Exception as e:
-            log_step_end(client, project, dataset, run_id, step, "FAILED", str(e))
+            log_step_end(client, dataset, run_id, step, "FAILED", str(e))
             raise
