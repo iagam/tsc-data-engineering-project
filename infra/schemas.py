@@ -80,7 +80,7 @@ USERS_ASSETS_SCHEMA = [
     bigquery.SchemaField("picture_large", "STRING"),
     bigquery.SchemaField("picture_medium", "STRING"),
     bigquery.SchemaField("picture_thumbnail", "STRING"),
-    bigquery.SchemaField("ingested_at", "TIMESTAMP"),
+    bigquery.SchemaField("ingested_at", "TIMESTAMP", mode="REQUIRED"),
 ]
 
 TABLE_SCHEMAS = {

@@ -1,8 +1,8 @@
 import uuid
-from utils.config_loader import load_config
+from utils.helper import load_config
 from utils.bigquery_client import get_bigquery_client
 from utils.logger import log_step_start, log_step_end
-from infra.setup import run_sql_file
+from utils.helper import run_sql_file
 from ingestion.api_client import fetch_api_data
 from ingestion.loader import insert_raw_data
 from transformations.transform import execute_transformations

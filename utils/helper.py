@@ -3,6 +3,16 @@ from dotenv import load_dotenv
 import yaml
 
 
+def run_sql_file(client, file_path):
+    with open(file_path, "r") as f:
+        query = f.read()
+
+    job = client.query(query)
+    job.result()
+
+    return job
+
+
 def load_config():
     load_dotenv()
 
