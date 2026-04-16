@@ -1,6 +1,4 @@
 from datetime import datetime, timezone
-import json
-
 
 def load_raw_data(client, dataset: str, run_id: str, data: dict, raw_table: str):
     """
@@ -17,7 +15,7 @@ def load_raw_data(client, dataset: str, run_id: str, data: dict, raw_table: str)
 
     rows = [
         {
-            "run_id": 2,
+            "run_id": run_id,
             "ingested_at": datetime.now(timezone.utc).isoformat(),
             "raw_json": data,
         }
