@@ -19,6 +19,8 @@ def fetch_api_data(url: str, params: dict, retries: int = 2, delay: int = 5):
         Exception: If the maximum number of retries is reached or a 500-level server error occurs.
     """
 
+    last_exception = None
+
     for i in range(retries):
         try:
             response = requests.get(url, params=params, timeout=10)
@@ -30,7 +32,8 @@ def fetch_api_data(url: str, params: dict, retries: int = 2, delay: int = 5):
                 raise Exception("Internal Server error")
 
         except Exception as e:
+            last_exception = e
             print(f"Retry {i+1} failed: {e}")
             time.sleep(delay)
 
-    raise Exception("API failed after retries")
+    raise Exception(f"API failed after retries: {str(last_exception)}")

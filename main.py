@@ -65,12 +65,11 @@ def main():
         ]
 
         execute_transformations(client, project, dataset, run_id, steps)
-
         print("Done")
 
     except Exception as e:
         print("Pipeline failed:", e)
-        log_step_end(client, project, dataset, run_id, step, "FAILED")
+        log_step_end(client, project, dataset, run_id, step, "FAILED", str(e))
         raise
 
     # Log pipeline metrics
